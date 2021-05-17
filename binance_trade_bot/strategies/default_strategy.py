@@ -10,5 +10,4 @@ class Strategy:
     def scout(self):
         list_of_tickets = self.manager.get_all_market_tickers()
         doge_price = list_of_tickets.get_price("DOGEUSDT")
-        self.logger.info("DOGEUSDT")
-        self.logger.info(str(doge_price))
+        self.logger.info("DOGEUSDT: " + str(doge_price))
