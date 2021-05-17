@@ -1,0 +1,15 @@
+version: '3'
+
+services:
+  crypto-trading:
+    build: .
+    image: twitter-binance-bot/binance-trade-bot
+    container_name: twitter-binance-bot_binace-trade-bot
+    working_dir: /app
+    volumes:
+      - ./app.cfg:/app/app.cfg
+      - ./logs:/app/logs
+      - ./config:/app/config
+    command: python -m binance_trade_bot
+    environment:
+      - PYTHONUNBUFFERED=1

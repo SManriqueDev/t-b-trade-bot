@@ -1,0 +1,10 @@
+*.log
+*.pyc
+__pycache__
+app.cfg
+.idea/
+.vscode/
+.replit
+venv/
+.DS_Store
+apprise.yml
