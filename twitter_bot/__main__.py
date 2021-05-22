@@ -3,9 +3,6 @@ from binance_trade_bot.config import Config
 import tweepy
 
 
-config = Config()
-
-
 def from_creator(status):
     if hasattr(status, 'retweeted_status'):
         return False
@@ -21,6 +18,7 @@ def from_creator(status):
 
 class TweetsListener(tweepy.StreamListener):
     def __init__(self, logger: Logger):
+        super(TweetsListener, self).__init__()
         self.logger = logger
 
     def on_connect(self):
@@ -34,18 +32,16 @@ class TweetsListener(tweepy.StreamListener):
         print("Error", status_code)
 
 
-auth = tweepy.OAuthHandler(config.TWEEPY_CONSUMER_KEY,
-                           config.TWEEPY_CONSUMER_SECRET)
-auth.set_access_token(
-    config.TWEEPY_ACCESS_TOKEN, config.TWEEPY_ACCESS_TOKEN_SECRET)
-
-api = tweepy.API(auth, wait_on_rate_limit=True, wait_on_rate_limit_notify=True)
-
-
 def main():
+    config = Config()
     logger = Logger()
+    auth = tweepy.OAuthHandler(config.TWEEPY_CONSUMER_KEY,
+                               config.TWEEPY_CONSUMER_SECRET)
+    auth.set_access_token(
+        config.TWEEPY_ACCESS_TOKEN, config.TWEEPY_ACCESS_TOKEN_SECRET)
+    api = tweepy.API(auth, wait_on_rate_limit=True,
+                     wait_on_rate_limit_notify=True)
     user = api.get_user("elonmusk")
-
     stream = TweetsListener(logger)
     streamingApi = tweepy.Stream(auth=api.auth, listener=stream)
     streamingApi.filter(
