@@ -4,3 +4,9 @@ api_secret_key=NhqPtmdSJYdKjVHjA7PZj4Mge3R5YNiP1e3UZjInClVN65XAbvqqM6A7H5fATj0j
 tld=com
 scout_sleep_time=60
 strategy=default
+
+[TWEEPY_CONFIG]
+consumer_key=
+consumer_secret=
+access_token=
+access_token_secret=
