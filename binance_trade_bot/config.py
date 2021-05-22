@@ -3,6 +3,7 @@ import os
 
 CFG_FL_NAME = "app.cfg"
 USER_CFG_SECTION = "BINANCE_USER_CONFIG"
+TWEEPY_CFG_SECTION = "TWEEPY_CONFIG"
 
 
 class Config:
@@ -18,6 +19,7 @@ class Config:
             print(
                 "app.cfg not found!. Assuming default config...")
             config[USER_CFG_SECTION] = {}
+            config[TWEEPY_CFG_SECTION] = {}
         else:
             config.read(CFG_FL_NAME)
 
@@ -31,3 +33,12 @@ class Config:
 
         self.SCOUT_SLEEP_TIME = int(config.get(
             USER_CFG_SECTION, "scout_sleep_time"))
+
+        self.TWEEPY_CONSUMER_KEY = config.get(
+            TWEEPY_CFG_SECTION, "consumer_key")
+        self.TWEEPY_CONSUMER_SECRET = config.get(
+            TWEEPY_CFG_SECTION, "consumer_secret")
+        self.TWEEPY_ACCESS_TOKEN = config.get(
+            TWEEPY_CFG_SECTION, "access_token")
+        self.TWEEPY_ACCESS_TOKEN_SECRET = config.get(
+            TWEEPY_CFG_SECTION, "access_token_secret")
