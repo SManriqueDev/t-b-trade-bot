@@ -18,7 +18,8 @@ def main():
             "Couldn't access Binance API - API keys may be wrong or lack sufficient permissions")
         return
     strategy = get_strategy(config.STRATEGY)
-    trader = strategy(manager, logger)
+
+    trader = strategy(manager, logger, config)
     schedule = SafeScheduler(logger)
     schedule.every(config.SCOUT_SLEEP_TIME).seconds.do(
         trader.scout).tag("searching for good trading opportunities")
