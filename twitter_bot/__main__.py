@@ -60,7 +60,7 @@ def main():
     config = Config()
     logger = Logger()
     twitter_manager = TwitterAPIManager(config)
-    user_id = twitter_manager.get_user_id("Sebasti75432075")
+    user_id = twitter_manager.get_user_id("elonmusk")
     stream = TwitterListener(logger)
     streamingApi = tweepy.Stream(
         auth=twitter_manager.get_api_auth(), listener=stream)
