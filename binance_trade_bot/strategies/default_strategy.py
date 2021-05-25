@@ -16,6 +16,9 @@ class DefaultStrategyListener(TweetsListener):
         if self.from_creator(status):
             self.logger.info('Elon Tweet: ' + status.text)
             self.elon_tweeted = True
+            all_market_tickets = self.manager.get_all_market_tickers()
+            doger_price = all_market_tickets.get_price("DOGEUSDT")
+            self.logger("DOGEUSDT: " + str(doger_price))
 
     def has_elon_tweeted(self):
         return self.elon_tweeted
