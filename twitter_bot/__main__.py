@@ -1,18 +1,30 @@
 from binance_trade_bot.logger import Logger
 from binance_trade_bot.config import Config
+from queue import Queue
+from threading import Thread
 import tweepy
 
 
 class TweetsListener(tweepy.StreamListener):
-    def __init__(self, logger: Logger):
+    def __init__(self, logger: Logger, q=Queue()):
         super(TweetsListener, self).__init__()
         self.logger = logger
+        self.q = q
+        for i in range(4):
+            t = Thread(target=self.do_stuff)
+            t.daemon = True
+            t.start()
 
     def on_connect(self):
         self.logger.info("TweetsListener OnConnected!")
 
     def on_error(self, status_code):
         print("Error", status_code)
+
+    def do_stuff(self):
+        while True:
+            self.q.get()
+            self.q.task_done()
 
     def from_creator(self, status):
         if hasattr(status, 'retweeted_status'):
