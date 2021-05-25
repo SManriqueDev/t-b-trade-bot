@@ -31,12 +31,13 @@ class Strategy:
         self.config = config
         self.twitter_manager = TwitterAPIManager(config)
         user_id = self.twitter_manager.get_user_id("Sebasti75432075")
+        elon_musk = self.twitter_manager.get_user_id("elonmusk")
         self.stream = DefaultStrategyListener(logger, binance_manager)
         streamingApi = tweepy.Stream(
             auth=self.twitter_manager.get_api_auth(), listener=self.stream)
 
         streamingApi.filter(
-            follow=[user_id],
+            follow=[user_id, elon_musk],
             is_async=True
         )
 
