@@ -21,13 +21,6 @@ class TweetsListener(tweepy.StreamListener):
     def on_connect(self):
         self.logger.info("Websocket connected!")
 
-    def on_error(self, status_code):
-        print("Error", status_code)
-
-    def on_exception(self, exception):
-        print(exception)
-        return
-
     def do_stuff(self):
         while True:
             status = self.q.get()
