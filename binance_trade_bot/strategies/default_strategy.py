@@ -12,12 +12,9 @@ class DefaultStrategyListener(TweetsListener):
         self.manager = manager
         self.elon_tweeted = False
 
-    # def on_status(self, status):
-    #     if self.from_creator(status):
-    #         self.logger.info('Elon Tweet: ' + status.text)
-    #         self.elon_tweeted = True
-
     def do_something(self, status):
+        print("Do something")
+        print(status.text)
         if self.from_creator(status):
             self.logger.info('Elon Tweet: ' + status.text)
             self.elon_tweeted = True
