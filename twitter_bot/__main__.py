@@ -10,13 +10,13 @@ class TweetsListener(tweepy.StreamListener):
         super(TweetsListener, self).__init__()
         self.logger = logger
         self.q = q
-        for i in range(4):
+        for i in range(8):
             t = Thread(target=self.do_stuff)
             t.daemon = True
             t.start()
 
     def on_status(self, status):
-        self.q.put(status)
+        self.q.put(status, timeout=1)
 
     def on_connect(self):
         self.logger.info("Websocket connected!")
