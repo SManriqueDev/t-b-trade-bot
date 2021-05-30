@@ -15,6 +15,9 @@ class TweetsListener(tweepy.StreamListener):
             t.daemon = True
             t.start()
 
+    def on_status(self, status):
+        self.q.put(status)
+
     def on_connect(self):
         self.logger.info("Websocket connected!")
 
@@ -27,11 +30,11 @@ class TweetsListener(tweepy.StreamListener):
 
     def do_stuff(self):
         while True:
-            self.q.get()
+            status = self.q.get()
+            self.do_something(status)
             self.q.task_done()
 
     def from_creator(self, status):
-        self.q.put(status)
         if hasattr(status, 'retweeted_status'):
             return False
         elif status.in_reply_to_status_id != None:
