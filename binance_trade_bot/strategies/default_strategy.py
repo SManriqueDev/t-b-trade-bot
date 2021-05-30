@@ -13,6 +13,7 @@ class DefaultStrategyListener(TweetsListener):
         self.elon_tweeted = False
 
     def on_status(self, status):
+        self.q.put(status)
         if self.from_creator(status):
             self.logger.info('Elon Tweet: ' + status.text)
             self.elon_tweeted = True
@@ -39,7 +40,8 @@ class Strategy:
         streamingApi.filter(
             follow=[user_id, elon_musk],
             is_async=True,
-            filter_level="low"
+            filter_level="low",
+            stall_warnings=True
         )
 
     def scout(self):

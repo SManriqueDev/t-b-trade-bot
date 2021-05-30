@@ -48,10 +48,6 @@ class TwitterListener(TweetsListener):
         super(TwitterListener, self).__init__(logger)
         self.logger = logger
 
-    def on_status(self, status):
-        if self.from_creator(status):
-            self.logger.info('Elon Tweet: ' + status.text)
-
 
 class TwitterAPIManager():
     def __init__(self, config: Config):
