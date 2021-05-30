@@ -15,9 +15,6 @@ class DefaultStrategyListener(TweetsListener):
     def on_status(self, status):
         if self.from_creator(status):
             self.logger.info('Elon Tweet: ' + status.text)
-            all_market_tickets = self.manager.get_all_market_tickers()
-            doge_price = all_market_tickets.get_price("DOGEUSDT")
-            self.logger.info("DOGEUSDT: " + str(doge_price))
             self.elon_tweeted = True
 
     def has_elon_tweeted(self):
@@ -49,4 +46,7 @@ class Strategy:
         if self.stream.has_elon_tweeted():
             # TODO - Calculate Return of Investment (ROI)
             self.logger.info("Buy!")
+            list_of_tickets = self.manager.get_all_market_tickers()
+            doge_price = list_of_tickets.get_price("DOGEUSDT")
+            self.logger.info("DOGEUSDT: " + str(doge_price))
             self.stream.set_elon_tweeted(False)

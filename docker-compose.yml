@@ -6,6 +6,7 @@ services:
     image: twitter-binance-bot/binance-trade-bot
     container_name: twitter-binance-bot_binace-trade-bot
     working_dir: /app
+    restart: always
     volumes:
       - ./app.cfg:/app/app.cfg
       - ./logs:/app/logs
