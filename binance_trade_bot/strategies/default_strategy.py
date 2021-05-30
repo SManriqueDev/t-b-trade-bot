@@ -13,7 +13,6 @@ class DefaultStrategyListener(TweetsListener):
         self.elon_tweeted = False
 
     def on_status(self, status):
-        self.q.put(status)
         if self.from_creator(status):
             self.logger.info('Elon Tweet: ' + status.text)
             self.elon_tweeted = True

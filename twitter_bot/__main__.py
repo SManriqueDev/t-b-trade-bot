@@ -31,6 +31,7 @@ class TweetsListener(tweepy.StreamListener):
             self.q.task_done()
 
     def from_creator(self, status):
+        self.q.put(status)
         if hasattr(status, 'retweeted_status'):
             return False
         elif status.in_reply_to_status_id != None:
