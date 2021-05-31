@@ -16,7 +16,7 @@ class TweetsListener(tweepy.StreamListener):
             t.start()
 
     def on_status(self, status):
-        self.q.put(status, timeout=1)
+        self.q.put(status, timeout=5)
 
     def on_connect(self):
         self.logger.info("Websocket connected!")
