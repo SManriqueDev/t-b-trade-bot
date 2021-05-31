@@ -39,7 +39,6 @@ class Strategy:
         streamingApi.filter(
             follow=[user_id, elon_musk],
             is_async=True,
-            filter_level="low",
             stall_warnings=True
         )
 
